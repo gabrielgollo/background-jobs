@@ -1,5 +1,5 @@
 const yup = require("yup");
-const CustomError = require("../helpers/customError");
+const CustomError = require("../helpers/CustomError");
 
 const storeuserSchema = yup.object().shape({
   name: yup.string().required("O campo name é obrigatório"),
@@ -16,4 +16,4 @@ const validateStoreUser = (message) => {
   }
 };
 
-module.exports = serSchema;
+module.exports = validateStoreUser;

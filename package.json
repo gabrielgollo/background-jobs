@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js && node ./src/queue.js",
+    "app": "node app.js",
+    "queue": "node ./src/queue.js",
+    "dev": "nodemon app.js && nodemon ./src/queue.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "bull": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "nodemailer": "^6.7.1",

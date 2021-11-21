@@ -1,9 +1,13 @@
-const Mail = require("../libs/Mail");
+const validateStoreUser = require("../validations/storeUserSchema");
+
+const Queue = require("../queue");
 
 class UserController {
   static async store(req, res) {
     try {
       const { name, email, password } = req.body;
+
+      validateStoreUser({ name, email, password });
 
       const user = {
         name,
@@ -11,12 +15,7 @@ class UserController {
         password,
       };
 
-      Mail.sendMail({
-        from: "Testando <background-jobs@teste.com.br>",
-        to: `${name} <${email}>`,
-        subject: "Usuário cadastrado",
-        html: `<h1>Olá ${name}</h1>`,
-      });
+      Queue.add("MailRegister", { user });
 
       return res.status(200).json(user);
     } catch (error) {
